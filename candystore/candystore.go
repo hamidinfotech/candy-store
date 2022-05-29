@@ -1,11 +1,16 @@
 package candystore
 
 import (
-	repository_sql "candystore/repository/sqlite"
-	//"candystore/repository/csv"
 	"candystore/entity"
+	"candystore/repository"
 )
 
+// Sqlite implementation repository
+var candystoreRepository repository.CandystoreRepository = repository.CandystoreRepositorySqlite{}
+
+// CSV implementation repository
+// var candystoreRepository repository.CandystoreRepository = repository.CandystoreRepositoryCSV{}
+
 func TopCustomers() []entity.CustomerStat {
-	return repository_sql.GetTopCustomers()
+	return candystoreRepository.GetTopCustomers()
 }

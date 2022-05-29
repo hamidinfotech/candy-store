@@ -1,4 +1,4 @@
-package repository_csv
+package repository
 
 import (
 	"candystore/entity"
@@ -9,9 +9,13 @@ import (
 	"strconv"
 )
 
-var filePath string = "customers.csv"
+type CandystoreRepositoryCSV struct {
 
-func GetTopCustomers() []entity.CustomerStat {
+}
+
+var filePath string = "data/customers.csv"
+
+func (c CandystoreRepositoryCSV) GetTopCustomers() []entity.CustomerStat {
 	customers := getAllCustomers()
 
 	customersUniqueCandies := getCustomersUniqueCandies(customers)
