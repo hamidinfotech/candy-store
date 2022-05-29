@@ -27,6 +27,8 @@ func (c CandystoreRepositorySqlite) GetTopCustomers() []entity.CustomerStat {
 
 	rows := query(sql)
 
+	defer rows.Close()
+
 	for rows.Next() {
 		customerStat := entity.CustomerStat{}
 		rows.Scan(&customerStat.Name, &customerStat.FavouriteSnack, &customerStat.TotalSnacks)
@@ -39,8 +41,6 @@ func (c CandystoreRepositorySqlite) GetTopCustomers() []entity.CustomerStat {
 func getDb() *sql.DB {
 	db, err := sql.Open("sqlite3", database)
 
-	// defer db.Close()
-
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -49,7 +49,11 @@ func getDb() *sql.DB {
 }
 
 func query(query string) *sql.Rows {
-	rows, error := getDb().Query(query)
+	db := getDb()
+
+	defer db.Close()
+
+	rows, error := db.Query(query)
 
 	if error != nil {
 		log.Fatal(error)
