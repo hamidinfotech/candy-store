@@ -1,5 +1,11 @@
 # Candy Store
 
-## Customers Data
+Top customers and their favourites
 
-Customers' data can be found in the file `customers.csv`
+## Endpoints
+
+Top customers:
+
+``` bash
+http://localhost:8181/customers/top
+```
